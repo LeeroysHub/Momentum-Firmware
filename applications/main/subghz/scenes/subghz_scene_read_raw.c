@@ -308,6 +308,14 @@ bool subghz_scene_read_raw_on_event(void* context, SceneManagerEvent event) {
                     subghz_txrx_rx_start(subghz->txrx);
                     subghz->state_notifications = SubGhzNotificationStateRx;
                     subghz_rx_key_state_set(subghz, SubGhzRxKeyStateAddKey);
+
+                    //Radio is receiving, the feed will come. meanwhile, the tick event grabs the RSSI, sets the Pause based on returned RSSI is above.
+                    //This has been set to happen, but no events have fired yet since the start of this code obviously!
+
+                    //If a time of start is required, this is it.
+
+                    //onto the tick event, this is where our logic will happen. the file is created now, lets fuckin do this!
+
                 } else {
                     furi_string_set(subghz->error_str, "Function requires\nan SD card.");
                     scene_manager_next_scene(subghz->scene_manager, SubGhzSceneShowError);
@@ -347,7 +355,19 @@ bool subghz_scene_read_raw_on_event(void* context, SceneManagerEvent event) {
                 subghz->threshold_rssi, subghz_txrx_radio_device_get_rssi(subghz->txrx));
             subghz_read_raw_add_data_rssi(
                 subghz->subghz_read_raw, ret_rssi.rssi, ret_rssi.is_above);
+
             subghz_protocol_raw_save_to_file_pause(decoder_raw, !ret_rssi.is_above);
+
+            //RSSI GET HERE LEEROY
+
+            //NEED TO MATCH THIS MOMENT IN TIME WITH RECEIVER.
+            //NO I DONT! If timing is required, we are gonna save tick start time and time the ticks for accurate timing!
+            //The bad relationship issue aint an issue unless we make it one!
+
+            //Magic needs to happen here somewhere.
+
+            //Pass the instance and RSSI and get the fuck out this damn event handler!
+            subghz_read_raw_raw_rssi_write(subghz->subghz_read_raw);
             break;
         case SubGhzNotificationStateTx:
             notification_message(subghz->notifications, &sequence_blink_magenta_10);

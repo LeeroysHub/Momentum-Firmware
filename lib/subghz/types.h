@@ -15,12 +15,15 @@
 #define SUBGHZ_RAW_FOLDER EXT_PATH("subghz")
 #define SUBGHZ_APP_FILENAME_PREFIX "SubGHz"
 #define SUBGHZ_APP_FILENAME_EXTENSION ".sub"
+#define SUBGHZ_APP_FILENAME_EXTENSION_RSSI_INFO ".rssi"
 
 #define SUBGHZ_KEY_FILE_VERSION 1
 #define SUBGHZ_KEY_FILE_TYPE "Flipper SubGhz Key File"
 
 #define SUBGHZ_RAW_FILE_VERSION 1
 #define SUBGHZ_RAW_FILE_TYPE "Flipper SubGhz RAW File"
+#define SUBGHZ_RAW_FILE_TYPE_RSSI "Flipper SubGhz RAW RSSI File"
+#define SUBGHZ_RAW_FILE_VERSION_RSSI 1
 
 #define SUBGHZ_KEYSTORE_DIR_NAME EXT_PATH("subghz/assets/keeloq_mfcodes")
 #define SUBGHZ_KEYSTORE_DIR_USER_NAME EXT_PATH("subghz/assets/keeloq_mfcodes_user")

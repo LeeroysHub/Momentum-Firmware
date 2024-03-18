@@ -28,6 +28,7 @@ struct SubGhzProtocolDecoderRAW {
     uint16_t ind_write;
     Storage* storage;
     FlipperFormat* flipper_file;
+    FlipperFormat* rssi_file; //metafile? cutfile?
     uint32_t file_is_open;
     FuriString* file_name;
     size_t sample_write;
@@ -92,6 +93,7 @@ bool subghz_protocol_raw_save_to_file_init(
 
     instance->storage = furi_record_open(RECORD_STORAGE);
     instance->flipper_file = flipper_format_file_alloc(instance->storage);
+    instance->rssi_file = flipper_format_file_alloc(instance->storage);
 
     FuriString* temp_str;
     temp_str = furi_string_alloc();
@@ -123,8 +125,31 @@ bool subghz_protocol_raw_save_to_file_init(
             break;
         }
 
+        //Create the filename for the rssi file
+        furi_string_printf(
+            temp_str,
+            "%s/%s%s%s",
+            SUBGHZ_RAW_FOLDER,
+            dev_name,
+            SUBGHZ_APP_FILENAME_EXTENSION,
+            SUBGHZ_APP_FILENAME_EXTENSION_RSSI_INFO);
+
+        //Open rssi file.
+        if(!flipper_format_file_open_always(instance->rssi_file, furi_string_get_cstr(temp_str))) {
+            FURI_LOG_E(TAG, "Unable to open file for write: %s", furi_string_get_cstr(temp_str));
+            break;
+        }
+
+        //Main Header for sub file.
         if(!flipper_format_write_header_cstr(
                instance->flipper_file, SUBGHZ_RAW_FILE_TYPE, SUBGHZ_RAW_FILE_VERSION)) {
+            FURI_LOG_E(TAG, "Unable to add header");
+            break;
+        }
+
+        //Main header for RSSI file.
+        if(!flipper_format_write_header_cstr(
+               instance->rssi_file, SUBGHZ_RAW_FILE_TYPE_RSSI, SUBGHZ_RAW_FILE_VERSION_RSSI)) {
             FURI_LOG_E(TAG, "Unable to add header");
             break;
         }
@@ -177,6 +202,10 @@ static bool subghz_protocol_raw_save_to_file_write(SubGhzProtocolDecoderRAW* ins
 
     bool is_write = false;
     if(instance->file_is_open == RAWFileIsOpenWrite) {
+        //WRITING TO THE FILE HERE LEEROY
+
+        //NEED TO RELATE THIS TO THE HISTORY IN THE MODEL AND DUMP WHAT WE HAVE.
+
         if(!flipper_format_write_int32(
                instance->flipper_file, "RAW_Data", instance->upload_raw, instance->ind_write)) {
             FURI_LOG_E(TAG, "Unable to add RAW_Data");
@@ -199,6 +228,8 @@ void subghz_protocol_raw_save_to_file_stop(SubGhzProtocolDecoderRAW* instance) {
         instance->upload_raw = NULL;
         flipper_format_file_close(instance->flipper_file);
         flipper_format_free(instance->flipper_file);
+        flipper_format_file_close(instance->rssi_file);
+        flipper_format_free(instance->rssi_file);
         furi_record_close(RECORD_STORAGE);
     }
 
@@ -251,6 +282,8 @@ void subghz_protocol_decoder_raw_feed(void* context, bool level, uint32_t durati
     // Add check if we got duration higher than 1 second, we skipping it, temp fix
     if((!instance->pause && (instance->upload_raw != NULL)) && (duration < ((uint32_t)1000000))) {
         if(duration > subghz_protocol_raw_const.te_short) {
+            //FEED COMES IN HERE LEEROY.
+
             if(instance->last_level != level) {
                 instance->last_level = (level ? true : false);
                 instance->upload_raw[instance->ind_write++] = (level ? duration : -duration);

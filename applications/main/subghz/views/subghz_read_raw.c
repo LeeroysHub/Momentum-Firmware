@@ -360,7 +360,7 @@ void subghz_read_raw_draw(Canvas* canvas, SubGhzReadRAWModel* model) {
     if(graphics_mode == 0) {
         subghz_read_raw_draw_sin(canvas, model);
     } else {
-        subghz_read_raw_draw_rssi(canvas, model);
+        subghz_read_raw_draw_rssi(canvas, model); //RSSI PAINT FROM HISTORY HERE LEEROY
         subghz_read_raw_draw_scale(canvas, model);
         subghz_read_raw_draw_threshold_rssi(canvas, model);
         canvas_set_font_direction(canvas, CanvasDirectionBottomToTop);
@@ -660,4 +660,34 @@ void subghz_read_raw_free(SubGhzReadRAW* instance) {
 View* subghz_read_raw_get_view(SubGhzReadRAW* instance) {
     furi_assert(instance);
     return instance->view;
+}
+
+void subghz_read_raw_raw_rssi_write(SubGhzReadRAW* instance) {
+    float rssi_current;
+    float rssi_last;
+
+    with_view_model(
+        instance->view,
+        SubGhzReadRAWModel * model,
+        {
+            rssi_current = model->rssi_current;
+            rssi_last = model->ind_write == 0 ? 0 : model->rssi_history[model->ind_write];
+        },
+        true);
+
+    UNUSED(rssi_current);
+    UNUSED(rssi_last);
+
+    //Here we are, my new home!
+
+    // 1)  How long will I have history? My feeling is, the UI is using this history, and ends when it feels like it.
+    // Model->rssi_history is fucked around with so much, are we history end? Its only for the UI, and they stopped caring.
+    // running on assumptions, mother of all fuck ups incoming. but 1st dev probe an logs will prove the assumptions wrong pretty fast!
+    // If model_history ends up being of value, Ill grab ad chunk to file.
+
+    // 2) We will not buffer the RSSI v0.1.Tests, memory is precious here. IF I do small enough writes, fast enough now,
+    //   Im hoping the impact will be small. If not, 3!
+
+    //3) Thread. Radio thread is to be left to play, no interfering there. their writes work, are done in UI thread I will follow
+    // Conclusion, v0.1.Test will not introduce any, or interfere with any threads. Write done in ticks where the Sub gets done. (Feed in thread, file write from here)
 }

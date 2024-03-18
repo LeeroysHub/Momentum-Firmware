@@ -54,3 +54,5 @@ void subghz_read_raw_set_status(
     float raw_threshold_rssi);
 
 View* subghz_read_raw_get_view(SubGhzReadRAW* subghz_static);
+
+void subghz_read_raw_raw_rssi_write(SubGhzReadRAW* instance);
