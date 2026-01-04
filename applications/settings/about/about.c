@@ -18,9 +18,8 @@ static DialogMessageButton about_screen_product(DialogsApp* dialogs, DialogMessa
     DialogMessageButton result;
 
     FuriString* screen_header = furi_string_alloc_printf(
-        "Product: %s\n"
+        "Product: Leeroy's Flipper\n"
         "Model: %s",
-        furi_hal_version_get_model_name(),
         furi_hal_version_get_model_code());
 
     FuriString* screen_text = furi_string_alloc_printf(
@@ -58,11 +57,12 @@ static DialogMessageButton about_screen_address(DialogsApp* dialogs, DialogMessa
 static DialogMessageButton about_screen_compliance(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
 
-    const char* screen_text = "For all compliance\n"
-                              "certificates, please visit:\n"
-                              "www.flipp.dev/compliance";
+    const char* screen_header = "Hack the Planet!";
+    const char* screen_text = "Don't be a skid\n"
+                              "but have fun flippin!";
 
-    dialog_message_set_text(message, screen_text, 0, 0, AlignLeft, AlignTop);
+    dialog_message_set_header(message, screen_header, 27, 5, AlignLeft, AlignTop);
+    dialog_message_set_text(message, screen_text, 27, 18, AlignLeft, AlignTop);
     result = dialog_message_show(dialogs, message);
 
     return result;
@@ -77,7 +77,7 @@ static DialogMessageButton about_screen_icon1(DialogsApp* dialogs, DialogMessage
     return result;
 }
 
-static DialogMessageButton about_screen_icon2(DialogsApp* dialogs, DialogMessage* message) {
+/*static DialogMessageButton about_screen_icon2(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
 
     dialog_message_set_icon(message, &I_Certification2_46x33, 15, 10);
@@ -126,7 +126,7 @@ static DialogMessageButton about_screen_cert_mexico(DialogsApp* dialogs, DialogM
     result = dialog_message_show(dialogs, message);
 
     return result;
-}
+}*/
 
 static DialogMessageButton about_screen_hw_version(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
@@ -209,11 +209,11 @@ const AboutDialogScreen about_screens[] = {
     about_screen_compliance,
     about_screen_address,
     about_screen_icon1,
-    about_screen_icon2,
+    /*about_screen_icon2,
     about_screen_cert_china_0,
     about_screen_cert_china_1,
     about_screen_cert_taiwan,
-    about_screen_cert_mexico,
+    about_screen_cert_mexico,*/
 };
 
 int32_t about_settings_app(void* p) {
