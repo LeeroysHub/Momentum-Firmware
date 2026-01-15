@@ -38,15 +38,16 @@ static void render_callback(Canvas* canvas, void* _ctx) {
     const char* mood_str = NULL;
     const Icon* portrait = NULL;
 
+#define MOOD "Mood: "
     if(stats->butthurt <= 4) {
         portrait = &I_Leeroy_Jenkins;
-        mood_str = "Mood: Lovin it!";
+        mood_str = MOOD "Lovin it!";
     } else if(stats->butthurt <= 9) {
         portrait = &I_Leeroy_Jenkins;
-        mood_str = "Mood: Chillin";
+        mood_str = MOOD "Chillin";
     } else {
         portrait = &I_Leeroy_Jenkins;
-        mood_str = "Mood: Pissed Off";
+        mood_str = MOOD "Pissed Off";
     }
 
     uint32_t xp_progress = 0;
@@ -78,12 +79,12 @@ static void render_callback(Canvas* canvas, void* _ctx) {
 
     const char* my_name = furi_hal_version_get_name_ptr();
     snprintf(level_str, sizeof(level_str), "Level: %hu", stats->level);
-    canvas_draw_str(canvas, 59, 10, my_name ? my_name : "Unknown");
+    canvas_draw_str(canvas, 59, 10, my_name ? my_name : "XXX");
     canvas_draw_str(canvas, 59, 22, mood_str);
     canvas_draw_str(canvas, 59, 34, level_str);
 
     if(stats->level == DOLPHIN_LEVEL_COUNT + 1) {
-        snprintf(xp_str, sizeof(xp_str), "Max Level!");
+        snprintf(xp_str, sizeof(xp_str), "Max!");
     } else {
         snprintf(xp_str, sizeof(xp_str), "%lu/%lu", xp_have, xp_target);
     }
