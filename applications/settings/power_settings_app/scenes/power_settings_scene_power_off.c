@@ -23,8 +23,7 @@ void power_settings_scene_power_off_on_enter(void* context) {
         AlignCenter,
         settings.happy_mode ? AlignCenter : AlignTop);
     if(!settings.happy_mode) {
-        dialog_ex_set_text(
-            dialog, "   I will\n miss you\n Leeroy...", 78, 14, AlignLeft, AlignTop);
+        dialog_ex_set_text(dialog, "   I will\nmiss you\nLeeroy...", 78, 14, AlignLeft, AlignTop);
         dialog_ex_set_icon(dialog, 14, 10, &I_dolph_cry_49x54);
     }
     dialog_ex_set_left_button_text(dialog, "Battery");
