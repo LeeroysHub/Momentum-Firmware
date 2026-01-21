@@ -1,8 +1,10 @@
 #include "protocol_items.h" // IWYU pragma: keep
 
+// SUBGHZ PROTOCOL LIST
 const SubGhzProtocol* const subghz_protocol_registry_items[] = {
     &subghz_protocol_gate_tx,
     &subghz_protocol_keeloq,
+    //&subghz_protocol_star_line,
     &subghz_protocol_nice_flo,
     &subghz_protocol_came,
     &subghz_protocol_faac_slh,
@@ -15,6 +17,7 @@ const SubGhzProtocol* const subghz_protocol_registry_items[] = {
     &subghz_protocol_nero_radio,
     &subghz_protocol_somfy_telis,
     &subghz_protocol_somfy_keytis,
+    //&subghz_protocol_scher_khan,
     &subghz_protocol_princeton,
     &subghz_protocol_raw,
     &subghz_protocol_linear,
