@@ -4,7 +4,7 @@
 
 #include "princeton.h"
 #include "keeloq.h"
-#include "star_line.h"
+//#include "star_line.h"
 #include "nice_flo.h"
 #include "came.h"
 #include "faac_slh.h"
@@ -18,7 +18,7 @@
 #include "nero_radio.h"
 #include "somfy_telis.h"
 #include "somfy_keytis.h"
-#include "scher_khan.h"
+//#include "scher_khan.h"
 #include "gate_tx.h"
 #include "raw.h"
 #include "linear.h"

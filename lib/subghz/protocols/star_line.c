@@ -212,7 +212,7 @@ static bool
     }
 }
 
-bool subghz_protocol_star_line_create_data(
+/*bool subghz_protocol_star_line_create_data(
     void* context,
     FlipperFormat* flipper_format,
     uint32_t serial,
@@ -232,7 +232,7 @@ bool subghz_protocol_star_line_create_data(
                subghz_block_generic_serialize(&instance->generic, flipper_format, preset);
     }
     return res;
-}
+}*/
 
 /**
  * Generating an upload from data.
