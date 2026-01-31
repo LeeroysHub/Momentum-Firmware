@@ -27,32 +27,20 @@ static void momentum_app_scene_interface_graphics_asset_pack_changed(VariableIte
 }
 
 const char* const anim_speed_names[] = {
-    "25%",
-    "50%",
     "75%",
     "100%",
     "125%",
     "150%",
     "175%",
     "200%",
-    "225%",
-    "250%",
-    "275%",
-    "300%",
 };
 const uint32_t anim_speed_values[COUNT_OF(anim_speed_names)] = {
-    25,
-    50,
     75,
     100,
     125,
     150,
     175,
     200,
-    225,
-    250,
-    275,
-    300,
 };
 static void momentum_app_scene_interface_graphics_anim_speed_changed(VariableItem* item) {
     MomentumApp* app = variable_item_get_context(item);
@@ -65,16 +53,11 @@ static void momentum_app_scene_interface_graphics_anim_speed_changed(VariableIte
 const char* const cycle_anims_names[] = {
     "OFF",
     "Meta.txt",
-    "15 S",
-    "30 S",
-    "1 M",
-    "2 M",
     "5 M",
     "10 M",
     "15 M",
     "30 M",
     "1 H",
-    "2 H",
     "6 H",
     "12 H",
     "24 H",
@@ -82,16 +65,11 @@ const char* const cycle_anims_names[] = {
 const int32_t cycle_anims_values[COUNT_OF(cycle_anims_names)] = {
     -1,
     0,
-    15,
-    30,
-    60,
-    120,
     300,
     600,
     900,
     1800,
     3600,
-    7200,
     21600,
     43200,
     86400,
