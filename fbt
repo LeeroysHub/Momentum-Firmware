@@ -23,17 +23,21 @@ if [ -z "$FBT_VERBOSE" ]; then
     SCONS_DEFAULT_FLAGS="$SCONS_DEFAULT_FLAGS -Q";
 fi
 
-if [ -z "$FBT_NO_SYNC" ]; then
-    if [ ! -e "$SCRIPT_PATH/.git" ]; then
-        echo "\".git\" directory not found, please clone repo via \"git clone\"";
-        exit 1;
-    fi
-    _FBT_CLONE_FLAGS="--jobs $N_GIT_THREADS";
-    if [ ! -z "$FBT_GIT_SUBMODULE_SHALLOW" ]; then
-        _FBT_CLONE_FLAGS="$_FBT_CLONE_FLAGS --depth 1";
-    fi
+if [ "$1" = "cli" ]; then
+    echo "Skipping sync for CLI mode."
+else
+    if [ -z "$FBT_NO_SYNC" ]; then
+        if [ ! -e "$SCRIPT_PATH/.git" ]; then
+            echo "\".git\" directory not found, please clone repo via \"git clone\"";
+            exit 1;
+        fi
+        _FBT_CLONE_FLAGS="--jobs $N_GIT_THREADS";
+        if [ ! -z "$FBT_GIT_SUBMODULE_SHALLOW" ]; then
+            _FBT_CLONE_FLAGS="$_FBT_CLONE_FLAGS --depth 1";
+        fi
 
-    git submodule update --init --recursive $_FBT_CLONE_FLAGS;
+        git submodule update --init --recursive $_FBT_CLONE_FLAGS;
+    fi
 fi
 
 $SCONS_EP $SCONS_DEFAULT_FLAGS "$@"
