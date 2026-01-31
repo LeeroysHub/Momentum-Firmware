@@ -4,8 +4,8 @@ enum VarItemListIndex {
     VarItemListIndexScreen,
     VarItemListIndexDolphin,
     VarItemListIndexSpoof,
-    VarItemListIndexVgm,
-    VarItemListIndexShowMomentumIntro,
+    //VarItemListIndexVgm,
+    //VarItemListIndexShowMomentumIntro,
 };
 
 void momentum_app_scene_misc_var_item_list_callback(void* context, uint32_t index) {
@@ -27,10 +27,10 @@ void momentum_app_scene_misc_on_enter(void* context) {
     item = variable_item_list_add(var_item_list, "Spoofing Options", 0, NULL, app);
     variable_item_set_current_value_text(item, ">");
 
-    item = variable_item_list_add(var_item_list, "VGM Options", 0, NULL, app);
-    variable_item_set_current_value_text(item, ">");
+    //item = variable_item_list_add(var_item_list, "VGM Options", 0, NULL, app);
+    //variable_item_set_current_value_text(item, ">");
 
-    variable_item_list_add(var_item_list, "Show Momentum Intro", 0, NULL, app);
+    //variable_item_list_add(var_item_list, "Show Momentum Intro", 0, NULL, app);
 
     variable_item_list_set_enter_callback(
         var_item_list, momentum_app_scene_misc_var_item_list_callback, app);
@@ -61,11 +61,11 @@ bool momentum_app_scene_misc_on_event(void* context, SceneManagerEvent event) {
             scene_manager_set_scene_state(app->scene_manager, MomentumAppSceneMiscSpoof, 0);
             scene_manager_next_scene(app->scene_manager, MomentumAppSceneMiscSpoof);
             break;
-        case VarItemListIndexVgm:
+        /*case VarItemListIndexVgm:
             scene_manager_set_scene_state(app->scene_manager, MomentumAppSceneMiscVgm, 0);
             scene_manager_next_scene(app->scene_manager, MomentumAppSceneMiscVgm);
-            break;
-        case VarItemListIndexShowMomentumIntro: {
+            break;*/
+        /*case VarItemListIndexShowMomentumIntro: {
             for(int i = 0; i < 10; i++) {
                 if(storage_common_copy(
                        app->storage, EXT_PATH("dolphin/firstboot.bin"), SLIDESHOW_FS_PATH)) {
@@ -75,7 +75,7 @@ bool momentum_app_scene_misc_on_event(void* context, SceneManagerEvent event) {
                 }
             }
             break;
-        }
+        }*/
         default:
             break;
         }

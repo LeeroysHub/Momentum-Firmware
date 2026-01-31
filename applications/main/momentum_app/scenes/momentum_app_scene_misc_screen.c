@@ -118,32 +118,24 @@ static void momentum_app_scene_misc_screen_rainbow_speed_changed(VariableItem* i
 
 const char* const rainbow_interval_names[] = {
     "0.1 S",
-    "0.2 S",
     "0.25 S",
     "0.5 S",
     "0.75 S",
     "1 S",
-    "1.25 S",
     "1.5 S",
-    "1.75 S",
     "2 S",
-    "2.5 S",
     "3 S",
     "4 S",
     "5 S",
 };
 const uint32_t rainbow_interval_values[COUNT_OF(rainbow_interval_names)] = {
     100,
-    200,
     250,
     500,
     750,
     1000,
-    1250,
     1500,
-    1750,
     2000,
-    2500,
     3000,
     4000,
     5000,
@@ -178,7 +170,7 @@ void momentum_app_scene_misc_screen_on_enter(void* context) {
     variable_item_set_current_value_text(item, momentum_settings.dark_mode ? "ON" : "OFF");
 
     item = variable_item_list_add(
-        var_item_list, "Left Handed", 2, momentum_app_scene_misc_screen_hand_orient_changed, app);
+        var_item_list, "I'm Lefty", 2, momentum_app_scene_misc_screen_hand_orient_changed, app);
     value_index = furi_hal_rtc_is_flag_set(FuriHalRtcFlagHandOrient);
     variable_item_set_current_value_index(item, value_index);
     variable_item_set_current_value_text(item, value_index ? "ON" : "OFF");
