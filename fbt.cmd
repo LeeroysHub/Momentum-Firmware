@@ -3,6 +3,8 @@ call "%~dp0scripts\toolchain\fbtenv.cmd" env || exit /b
 
 set SCONS_EP=python -m SCons
 
+if /I "%1"=="cli" goto :skip_sync
+
 if [%FBT_NO_SYNC%] == [] (
     set _FBT_CLONE_FLAGS=--jobs %NUMBER_OF_PROCESSORS%
     if not [%FBT_GIT_SUBMODULE_SHALLOW%] == [] (
@@ -19,6 +21,8 @@ if [%FBT_NO_SYNC%] == [] (
         exit /b 1
     )
 )
+
+:skip_sync
 
 set "SCONS_DEFAULT_FLAGS=--warn=target-not-built"
 
