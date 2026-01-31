@@ -5,7 +5,7 @@ enum VarItemListIndex {
     VarItemListIndexMainmenu,
     VarItemListIndexLockscreen,
     VarItemListIndexStatusbar,
-    VarItemListIndexFileBrowser,
+    //VarItemListIndexFileBrowser,
     VarItemListIndexGeneral,
 };
 
@@ -31,8 +31,8 @@ void momentum_app_scene_interface_on_enter(void* context) {
     item = variable_item_list_add(var_item_list, "Statusbar", 0, NULL, app);
     variable_item_set_current_value_text(item, ">");
 
-    item = variable_item_list_add(var_item_list, "File Browser", 0, NULL, app);
-    variable_item_set_current_value_text(item, ">");
+    //item = variable_item_list_add(var_item_list, "File Browser", 0, NULL, app);
+    //variable_item_set_current_value_text(item, ">");
 
     item = variable_item_list_add(var_item_list, "General", 0, NULL, app);
     variable_item_set_current_value_text(item, ">");
@@ -75,11 +75,11 @@ bool momentum_app_scene_interface_on_event(void* context, SceneManagerEvent even
                 app->scene_manager, MomentumAppSceneInterfaceStatusbar, 0);
             scene_manager_next_scene(app->scene_manager, MomentumAppSceneInterfaceStatusbar);
             break;
-        case VarItemListIndexFileBrowser:
-            scene_manager_set_scene_state(
-                app->scene_manager, MomentumAppSceneInterfaceFilebrowser, 0);
-            scene_manager_next_scene(app->scene_manager, MomentumAppSceneInterfaceFilebrowser);
-            break;
+        //case VarItemListIndexFileBrowser:
+        //    scene_manager_set_scene_state(
+        //        app->scene_manager, MomentumAppSceneInterfaceFilebrowser, 0);
+        //    scene_manager_next_scene(app->scene_manager, MomentumAppSceneInterfaceFilebrowser);
+        //    break;
         case VarItemListIndexGeneral:
             scene_manager_set_scene_state(app->scene_manager, MomentumAppSceneInterfaceGeneral, 0);
             scene_manager_next_scene(app->scene_manager, MomentumAppSceneInterfaceGeneral);
