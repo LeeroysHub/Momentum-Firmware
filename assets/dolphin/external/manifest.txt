@@ -259,3 +259,24 @@ Max butthurt: 14
 Min level: 1
 Max level: 30
 Weight: 4
+
+Name: Leeroy_DancingJesus
+Min butthurt: 0
+Max butthurt: 14
+Min level: 1
+Max level: 30
+Weight: 3
+
+Name: Sasquach_D1g1talRa1n_128x64
+Min butthurt: 0
+Max butthurt: 14
+Min level: 1
+Max level: 30
+Weight: 3
+
+Name: L2_Secret_door_128x64
+Min butthurt: 0
+Max butthurt: 14
+Min level: 1
+Max level: 30
+Weight: 3
