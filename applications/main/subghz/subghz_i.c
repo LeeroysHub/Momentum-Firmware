@@ -190,7 +190,8 @@ bool subghz_key_load(SubGhz* subghz, const char* file_path, bool show_dialog) {
             temp_lat,
             temp_lon,
             subghz_setting_get_preset_data(setting, preset_index),
-            subghz_setting_get_preset_data_size(setting, preset_index));
+            subghz_setting_get_preset_data_size(setting, preset_index),
+            subghz->tx_power);
 
         //Load protocol
         if(!flipper_format_read_string(fff_data_file, "Protocol", temp_str)) {

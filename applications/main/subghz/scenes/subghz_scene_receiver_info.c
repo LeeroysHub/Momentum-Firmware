@@ -43,7 +43,8 @@ static bool subghz_scene_receiver_info_update_parser(void* context) {
             NAN,
             NAN,
             preset->data,
-            preset->data_size);
+            preset->data_size,
+            subghz->tx_power);
 
         return true;
     }

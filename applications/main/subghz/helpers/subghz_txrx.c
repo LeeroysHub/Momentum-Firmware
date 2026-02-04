@@ -7,7 +7,22 @@
 
 #include <power/power_service/power.h>
 
-#define TAG "SubGhzTxRx"
+#define TAG                   "SubGhzTxRx"
+#define TX_PRESET_POWER_COUNT 11
+
+const uint32_t tx_power_value[TX_PRESET_POWER_COUNT] = {
+    0,
+    0xC0,
+    0xC5,
+    0xCD,
+    0x86,
+    0x50,
+    0x37,
+    0x26,
+    0x1D,
+    0x17,
+    0x03,
+};
 
 static void subghz_txrx_radio_device_power_on(SubGhzTxRx* instance) {
     UNUSED(instance);
@@ -101,9 +116,16 @@ void subghz_txrx_set_preset(
     float latitude,
     float longitude,
     uint8_t* preset_data,
-    size_t preset_data_size) {
+    size_t preset_data_size,
+    uint32_t tx_power) {
     furi_assert(instance);
     furi_string_set(instance->preset->name, preset_name);
+#define TX_POWER_OFFSET 7
+
+    //Set the TX Power Here in the CC1101 register...
+    if(tx_power)
+        preset_data[preset_data_size - TX_POWER_OFFSET] = (uint8_t)tx_power_value[tx_power];
+
     SubGhzRadioPreset* preset = instance->preset;
     preset->frequency = frequency;
     preset->latitude = latitude;
@@ -688,11 +710,14 @@ void subghz_txrx_set_default_preset(SubGhzTxRx* instance, uint32_t frequency) {
     if(frequency == 0) {
         frequency = subghz_setting_get_default_frequency(subghz_txrx_get_setting(instance));
     }
-    subghz_txrx_set_preset(instance, default_modulation, frequency, NAN, NAN, NULL, 0);
+    subghz_txrx_set_preset(instance, default_modulation, frequency, NAN, NAN, NULL, 0, 0);
 }
 
-const char*
-    subghz_txrx_set_preset_internal(SubGhzTxRx* instance, uint32_t frequency, uint8_t index) {
+const char* subghz_txrx_set_preset_internal(
+    SubGhzTxRx* instance,
+    uint32_t frequency,
+    uint8_t index,
+    uint32_t tx_power) {
     furi_assert(instance);
 
     SubGhzSetting* setting = subghz_txrx_get_setting(instance);
@@ -706,7 +731,8 @@ const char*
         NAN,
         NAN,
         subghz_setting_get_preset_data(setting, index),
-        subghz_setting_get_preset_data_size(setting, index));
+        subghz_setting_get_preset_data_size(setting, index),
+        tx_power);
 
     return preset_name;
 }

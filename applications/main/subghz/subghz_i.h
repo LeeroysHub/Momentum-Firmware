@@ -100,6 +100,7 @@ struct SubGhz {
     uint16_t idx_menu_chosen;
     SubGhzLoadTypeFile load_type_file;
     uint32_t start_tx_time;
+    uint32_t tx_power;
 
     bool fav_timeout;
     FuriTimer* timer;

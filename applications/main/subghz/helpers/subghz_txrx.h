@@ -59,7 +59,8 @@ void subghz_txrx_set_preset(
     float latitude,
     float longitude,
     uint8_t* preset_data,
-    size_t preset_data_size);
+    size_t preset_data_size,
+    uint32_t tx_power);
 
 /**
  * Get name of preset
@@ -392,5 +393,8 @@ void subghz_txrx_set_default_preset(SubGhzTxRx* instance, uint32_t frequency);
  * @param index - index of preset taken from SubGhzSetting
  * @return const char* -  name of preset
  */
-const char*
-    subghz_txrx_set_preset_internal(SubGhzTxRx* instance, uint32_t frequency, uint8_t index);
+const char* subghz_txrx_set_preset_internal(
+    SubGhzTxRx* instance,
+    uint32_t frequency,
+    uint8_t index,
+    uint32_t tx_power);
