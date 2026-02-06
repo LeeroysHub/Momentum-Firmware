@@ -5,8 +5,7 @@
 
 #include <lib/subghz/blocks/custom_btn.h>
 
-#define TAG         "SubGhzSceneTransmitter"
-#define MIN_TX_TIME 666
+#define TAG "SubGhzSceneTransmitter"
 
 void subghz_scene_transmitter_callback(SubGhzCustomEvent event, void* context) {
     furi_assert(context);
@@ -79,29 +78,6 @@ void subghz_scene_transmitter_on_enter(void* context) {
             subghz->timer, momentum_settings.favorite_timeout * furi_kernel_get_tick_frequency());
     }
 }
-void stop_tx(SubGhz* subghz) {
-    subghz->state_notifications = SubGhzNotificationStateIDLE;
-    subghz_txrx_stop(subghz->txrx);
-    if(subghz_custom_btn_get() != SUBGHZ_CUSTOM_BTN_OK) {
-        subghz_custom_btn_set(SUBGHZ_CUSTOM_BTN_OK);
-        int32_t tmp_counter = furi_hal_subghz_get_rolling_counter_mult();
-        furi_hal_subghz_set_rolling_counter_mult(0);
-        // Calling restore!
-        subghz_tx_start(subghz, subghz_txrx_get_fff_data(subghz->txrx));
-        subghz_txrx_stop(subghz->txrx);
-        // Calling restore 2nd time special for FAAC SLH!
-        // TODO: Find better way to restore after custom button is used!!!
-        subghz_tx_start(subghz, subghz_txrx_get_fff_data(subghz->txrx));
-        subghz_txrx_stop(subghz->txrx);
-        furi_hal_subghz_set_rolling_counter_mult(tmp_counter);
-        subghz->start_tx_time = 0;
-    }
-    if(subghz->fav_timeout) {
-        while(scene_manager_handle_back_event(subghz->scene_manager))
-            ;
-        view_dispatcher_stop(subghz->view_dispatcher);
-    }
-}
 
 bool subghz_scene_transmitter_on_event(void* context, SceneManagerEvent event) {
     SubGhz* subghz = context;
@@ -111,13 +87,31 @@ bool subghz_scene_transmitter_on_event(void* context, SceneManagerEvent event) {
 
             if(subghz_tx_start(subghz, subghz_txrx_get_fff_data(subghz->txrx))) {
                 subghz->state_notifications = SubGhzNotificationStateTx;
-                subghz->start_tx_time = furi_get_tick();
                 subghz_scene_transmitter_update_data_show(subghz);
                 dolphin_deed(DolphinDeedSubGhzSend);
             }
             return true;
         } else if(event.event == SubGhzCustomEventViewTransmitterSendStop) {
-            if((furi_get_tick() - subghz->start_tx_time) > MIN_TX_TIME) stop_tx(subghz);
+            subghz->state_notifications = SubGhzNotificationStateIDLE;
+            subghz_txrx_stop(subghz->txrx);
+            if(subghz_custom_btn_get() != SUBGHZ_CUSTOM_BTN_OK) {
+                subghz_custom_btn_set(SUBGHZ_CUSTOM_BTN_OK);
+                int32_t tmp_counter = furi_hal_subghz_get_rolling_counter_mult();
+                furi_hal_subghz_set_rolling_counter_mult(0);
+                // Calling restore!
+                subghz_tx_start(subghz, subghz_txrx_get_fff_data(subghz->txrx));
+                subghz_txrx_stop(subghz->txrx);
+                // Calling restore 2nd time special for FAAC SLH!
+                // TODO: Find better way to restore after custom button is used!!!
+                subghz_tx_start(subghz, subghz_txrx_get_fff_data(subghz->txrx));
+                subghz_txrx_stop(subghz->txrx);
+                furi_hal_subghz_set_rolling_counter_mult(tmp_counter);
+            }
+            if(subghz->fav_timeout) {
+                while(scene_manager_handle_back_event(subghz->scene_manager))
+                    ;
+                view_dispatcher_stop(subghz->view_dispatcher);
+            }
             return true;
         } else if(event.event == SubGhzCustomEventViewTransmitterBack) {
             subghz->state_notifications = SubGhzNotificationStateIDLE;
@@ -130,10 +124,7 @@ bool subghz_scene_transmitter_on_event(void* context, SceneManagerEvent event) {
         }
     } else if(event.type == SceneManagerEventTypeTick) {
         if(subghz->state_notifications == SubGhzNotificationStateTx) {
-            if(subghz->start_tx_time && ((furi_get_tick() - subghz->start_tx_time) > MIN_TX_TIME))
-                stop_tx(subghz);
-            else
-                notification_message(subghz->notifications, &sequence_blink_magenta_10);
+            notification_message(subghz->notifications, &sequence_blink_magenta_10);
         }
         return true;
     }
