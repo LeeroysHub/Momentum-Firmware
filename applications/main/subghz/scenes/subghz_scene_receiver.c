@@ -264,6 +264,7 @@ void subghz_scene_receiver_on_enter(void* context) {
         subghz_txrx_receiver_set_filter(subghz->txrx, subghz->filter);
         subghz->ignore_filter = subghz->last_settings->ignore_filter;
         subghz_txrx_receiver_set_ignore_filter(subghz->txrx, subghz->ignore_filter);
+        subghz->tx_power = subghz->last_settings->tx_power;
 
         subghz_history_reset(history);
         subghz_rx_key_state_set(subghz, SubGhzRxKeyStateStart);

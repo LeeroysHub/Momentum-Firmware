@@ -224,6 +224,11 @@ static void subghz_scene_receiver_config_set_frequency(VariableItem* item) {
             frequency / 1000000,
             (frequency % 1000000) / 10000);
         variable_item_set_current_value_text(item, text_buf);
+
+        //Set TX Power
+        subghz_txrx_set_tx_power(preset.data, preset.data_size, subghz->tx_power);
+
+        //Set the preset now.
         subghz_txrx_set_preset(
             subghz->txrx,
             furi_string_get_cstr(preset.name),
@@ -231,8 +236,7 @@ static void subghz_scene_receiver_config_set_frequency(VariableItem* item) {
             NAN,
             NAN,
             preset.data,
-            preset.data_size,
-            subghz->tx_power);
+            preset.data_size);
 
         preset = subghz_txrx_get_preset(subghz->txrx);
 
@@ -253,15 +257,14 @@ static void subghz_scene_receiver_config_set_preset(VariableItem* item) {
     variable_item_set_current_value_text(item, preset_name);
     //subghz->last_settings->preset = index;
     SubGhzRadioPreset preset = subghz_txrx_get_preset(subghz->txrx);
+    uint8_t* preset_data = subghz_setting_get_preset_data(setting, index);
+    size_t preset_data_size = subghz_setting_get_preset_data_size(setting, index);
+
+    //Edit TX power, if necessary.
+    subghz_txrx_set_tx_power(preset_data, preset_data_size, subghz->tx_power);
+
     subghz_txrx_set_preset(
-        subghz->txrx,
-        preset_name,
-        preset.frequency,
-        NAN,
-        NAN,
-        subghz_setting_get_preset_data(setting, index),
-        subghz_setting_get_preset_data_size(setting, index),
-        subghz->tx_power);
+        subghz->txrx, preset_name, preset.frequency, NAN, NAN, preset_data, preset_data_size);
     subghz->last_settings->preset_index = index;
 }
 
@@ -287,6 +290,9 @@ static void subghz_scene_receiver_config_set_hopping(VariableItem* item) {
             (frequency % 1000000) / 10000);
         variable_item_set_current_value_text(frequency_item, text_buf);
 
+        //Edit TX power, if necessary.
+        subghz_txrx_set_tx_power(preset.data, preset.data_size, subghz->tx_power);
+
         // Maybe better add one more function with only with the frequency argument?
         subghz_txrx_set_preset(
             subghz->txrx,
@@ -295,8 +301,7 @@ static void subghz_scene_receiver_config_set_hopping(VariableItem* item) {
             NAN,
             NAN,
             preset.data,
-            preset.data_size,
-            subghz->tx_power);
+            preset.data_size);
         variable_item_set_current_value_index(
             frequency_item, subghz_setting_get_frequency_default_index(setting));
 
@@ -354,6 +359,9 @@ static void subghz_scene_receiver_config_set_tx_power(VariableItem* item) {
     uint32_t frequency = subghz_setting_get_default_frequency(setting);
     SubGhzRadioPreset preset = subghz_txrx_get_preset(subghz->txrx);
 
+    //Edit TX power, if necessary.
+    subghz_txrx_set_tx_power(preset.data, preset.data_size, subghz->tx_power);
+
     // Maybe better add one more function with only with the frequency argument?
     subghz_txrx_set_preset(
         subghz->txrx,
@@ -362,8 +370,7 @@ static void subghz_scene_receiver_config_set_tx_power(VariableItem* item) {
         NAN,
         NAN,
         preset.data,
-        preset.data_size,
-        subghz->tx_power);
+        preset.data_size);
 }
 
 static void subghz_scene_receiver_config_set_repeater(VariableItem* item) {

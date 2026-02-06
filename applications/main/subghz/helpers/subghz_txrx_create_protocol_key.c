@@ -26,7 +26,7 @@ bool subghz_txrx_gen_data_protocol(
 
     bool res = false;
 
-    subghz_txrx_set_preset(instance, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(instance, preset_name, frequency, NAN, NAN, NULL, 0);
     instance->decoder_result =
         subghz_receiver_search_decoder_base_by_name(instance->receiver, protocol_name);
 
@@ -107,7 +107,7 @@ bool subghz_txrx_gen_keeloq_protocol( //TODO lead to a general appearance
 
     instance->transmitter =
         subghz_transmitter_alloc_init(instance->environment, SUBGHZ_PROTOCOL_KEELOQ_NAME);
-    subghz_txrx_set_preset(instance, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(instance, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(instance->transmitter &&
        subghz_protocol_keeloq_create_data(
@@ -140,7 +140,7 @@ bool subghz_txrx_gen_keeloq_bft_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_KEELOQ_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_keeloq_bft_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
@@ -184,7 +184,7 @@ bool subghz_txrx_gen_nice_flor_s_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_NICE_FLOR_S_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_nice_flor_s_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
@@ -217,7 +217,7 @@ bool subghz_txrx_gen_faac_slh_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_FAAC_SLH_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_faac_slh_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
@@ -260,7 +260,7 @@ bool subghz_txrx_gen_alutech_at_4n_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_ALUTECH_AT_4N_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_alutech_at_4n_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
@@ -289,7 +289,7 @@ bool subghz_txrx_gen_came_atomo_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_CAME_ATOMO_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_came_atomo_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
@@ -318,7 +318,7 @@ bool subghz_txrx_gen_somfy_telis_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_SOMFY_TELIS_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_somfy_telis_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
@@ -348,7 +348,7 @@ bool subghz_txrx_gen_kinggates_stylo_4k_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_KINGGATES_STYLO_4K_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_kinggates_stylo_4k_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
@@ -378,7 +378,7 @@ bool subghz_txrx_gen_beninca_arc_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_BENINCA_ARC_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_beninca_arc_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
@@ -407,7 +407,7 @@ bool subghz_txrx_gen_secplus_v2_protocol(
     bool ret = false;
     instance->transmitter =
         subghz_transmitter_alloc_init(instance->environment, SUBGHZ_PROTOCOL_SECPLUS_V2_NAME);
-    subghz_txrx_set_preset(instance, name_preset, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(instance, name_preset, frequency, NAN, NAN, NULL, 0);
     if(instance->transmitter) {
         subghz_protocol_secplus_v2_create_data(
             subghz_transmitter_get_protocol_instance(instance->transmitter),
@@ -456,7 +456,7 @@ bool subghz_txrx_gen_phoenix_v2_protocol(
 
     txrx->transmitter =
         subghz_transmitter_alloc_init(txrx->environment, SUBGHZ_PROTOCOL_PHOENIX_V2_NAME);
-    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0, 0);
+    subghz_txrx_set_preset(txrx, preset_name, frequency, NAN, NAN, NULL, 0);
 
     if(txrx->transmitter && subghz_protocol_phoenix_v2_create_data(
                                 subghz_transmitter_get_protocol_instance(txrx->transmitter),
