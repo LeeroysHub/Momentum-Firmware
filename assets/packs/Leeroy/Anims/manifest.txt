@@ -1,13 +1,6 @@
 Filetype: Flipper Animation Manifest
 Version: 1
 
-Name: ANOM_intro
-Min butthurt: 0
-Max butthurt: 14
-Min level: 1
-Max level: 30
-Weight: 3
-
 Name: anon_bondage_128x64
 Min butthurt: 0
 Max butthurt: 14
@@ -34,7 +27,7 @@ Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 3
+Weight: 10
 
 Name: chicken_128x64
 Min butthurt: 0
@@ -48,21 +41,21 @@ Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 1
+Weight: 10
 
 Name: Daffy_Duck_128x64
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 10
+Weight: 5
 
 Name: DigitalRainThick_inversed
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: FBI_Warning_128x64
 Min butthurt: 0
@@ -104,14 +97,14 @@ Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 3
+Weight: 4
 
 Name: Leeroy_DancingJesus
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 10
 
 Name: MaxHeadroom1
 Min butthurt: 0
@@ -132,35 +125,35 @@ Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 4
 
 Name: n8_Burns_128x64
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 12
+Weight: 10
 
 Name: NSFW_lvl_5
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 10
 
 Name: NSFW_lvl_6
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 10
 
 Name: NSFW_lvl_10
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 10
 
 Name: pantsu2_128x64
 Min butthurt: 0
@@ -181,56 +174,56 @@ Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: R3_NES
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: RM_Hacked_128x64
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: RM_HomerW33d_128x64
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: RM_Kaz0ku_Haha_128x64
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: RM_Stoned_128x64
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: RM_W33dRain_128x64
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: RM_W33dRoll_128x64
 Min butthurt: 0
 Max butthurt: 14
 Min level: 1
 Max level: 30
-Weight: 8
+Weight: 5
 
 Name: Sasquach_Bart_128x64
 Min butthurt: 0
