@@ -11,6 +11,16 @@
 extern "C" {
 #endif
 
+//For sending Left and Right events up to app
+//When there are ZERO values (no cycling used by list itself)
+//This allows easy use of lists that cycle the whole line,
+//And use more than 255 values.
+typedef enum {
+    VariableItemListEventCycleReset,
+    VariableItemListEventCycleLeft,
+    VariableItemListEventCycleRight,
+} VariableItemListEvents;
+
 typedef struct VariableItemList VariableItemList;
 typedef struct VariableItem VariableItem;
 typedef void (*VariableItemChangeCallback)(VariableItem* item);
