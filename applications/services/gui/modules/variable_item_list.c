@@ -368,6 +368,13 @@ void variable_item_list_process_left(VariableItemList* variable_item_list) {
                 model->locked_message_visible = true;
                 furi_timer_start(
                     variable_item_list->locked_timer, furi_kernel_get_tick_frequency() * 3);
+            } else if(!item->values_count) {
+                //No List to change. Send VariableItemListEventCycleLeft to the handler as current value index
+                //This way no breaking API changes are made.
+                item->current_value_index = VariableItemListEventCycleLeft;
+                if(item->change_callback) {
+                    item->change_callback(item);
+                }
             } else if(item->current_value_index > 0) {
                 item->current_value_index--;
                 model->scroll_counter = 0;
@@ -389,6 +396,13 @@ void variable_item_list_process_right(VariableItemList* variable_item_list) {
                 model->locked_message_visible = true;
                 furi_timer_start(
                     variable_item_list->locked_timer, furi_kernel_get_tick_frequency() * 3);
+            } else if(!item->values_count) {
+                //No List to change. Send VariableItemListEventCycleLeft to the handler as current value index
+                //This way no breaking API changes are made.
+                item->current_value_index = VariableItemListEventCycleRight;
+                if(item->change_callback) {
+                    item->change_callback(item);
+                }
             } else if(item->current_value_index < (item->values_count - 1)) {
                 item->current_value_index++;
                 model->scroll_counter = 0;
