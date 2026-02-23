@@ -52,7 +52,7 @@ static DialogMessageButton about_screen_product(DialogsApp* dialogs, DialogMessa
     result = dialog_message_show(dialogs, message);
 
     return result;
-} */
+} 
 
 static DialogMessageButton about_screen_compliance(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
@@ -66,7 +66,7 @@ static DialogMessageButton about_screen_compliance(DialogsApp* dialogs, DialogMe
     result = dialog_message_show(dialogs, message);
 
     return result;
-}
+}*/
 
 static DialogMessageButton about_screen_icon1(DialogsApp* dialogs, DialogMessage* message) {
     DialogMessageButton result;
@@ -206,7 +206,7 @@ const AboutDialogScreen about_screens[] = {
     about_screen_product,
     about_screen_hw_version,
     about_screen_fw_version,
-    about_screen_compliance,
+    //about_screen_compliance,
     //about_screen_address,
     about_screen_icon1,
     /*about_screen_icon2,
