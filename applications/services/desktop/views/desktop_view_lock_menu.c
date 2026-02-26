@@ -15,7 +15,7 @@ static const NotificationSequence sequence_note_c = {
 };
 
 typedef enum {
-    DesktopLockMenuIndexLefthandedMode,
+    DesktopLockMenuIndexDebug,
     DesktopLockMenuIndexSettings,
     DesktopLockMenuIndexDarkMode,
     DesktopLockMenuIndexLock,
@@ -92,9 +92,9 @@ void desktop_lock_menu_draw_callback(Canvas* canvas, void* model) {
         }
 
         switch(i) {
-        case DesktopLockMenuIndexLefthandedMode:
-            icon = &I_CC_LefthandedMode_16x16;
-            enabled = furi_hal_rtc_is_flag_set(FuriHalRtcFlagHandOrient);
+        case DesktopLockMenuIndexDebug:
+            icon = &I_CC_DebugMode_16x16;
+            enabled = furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug);
             break;
         case DesktopLockMenuIndexSettings:
             icon = &I_CC_Settings_16x16;
@@ -281,11 +281,11 @@ bool desktop_lock_menu_input_callback(InputEvent* event, void* context) {
             consumed = false;
         } else if(event->key == InputKeyOk && event->type == InputTypeShort) {
             switch(idx) {
-            case DesktopLockMenuIndexLefthandedMode:
-                if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagHandOrient)) {
-                    furi_hal_rtc_reset_flag(FuriHalRtcFlagHandOrient);
+            case DesktopLockMenuIndexDebug:
+                if(furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug)) {
+                    furi_hal_rtc_reset_flag(FuriHalRtcFlagDebug);
                 } else {
-                    furi_hal_rtc_set_flag(FuriHalRtcFlagHandOrient);
+                    furi_hal_rtc_set_flag(FuriHalRtcFlagDebug);
                 }
                 break;
             case DesktopLockMenuIndexSettings:
