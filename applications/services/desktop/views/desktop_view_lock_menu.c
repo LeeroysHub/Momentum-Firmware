@@ -20,7 +20,7 @@ typedef enum {
     DesktopLockMenuIndexDarkMode,
     DesktopLockMenuIndexLock,
     DesktopLockMenuIndexBluetooth,
-    DesktopLockMenuIndexMomentum,
+    DesktopLockMenuIndexSnake,
     DesktopLockMenuIndexBrightness,
     DesktopLockMenuIndexVolume,
 
@@ -110,8 +110,8 @@ void desktop_lock_menu_draw_callback(Canvas* canvas, void* model) {
             icon = &I_CC_Bluetooth_16x16;
             enabled = m->lock_menu->bt->bt_settings.enabled;
             break;
-        case DesktopLockMenuIndexMomentum:
-            icon = &I_CC_Momentum_16x16;
+        case DesktopLockMenuIndexSnake:
+            icon = &I_CC_Snake_16x16;
             break;
         case DesktopLockMenuIndexBrightness:
             icon = &I_Pin_star_7x7;
@@ -304,8 +304,8 @@ bool desktop_lock_menu_input_callback(InputEvent* event, void* context) {
                 }
                 lock_menu->save_bt = true;
                 break;
-            case DesktopLockMenuIndexMomentum:
-                desktop_event = DesktopLockMenuEventMomentum;
+            case DesktopLockMenuIndexSnake:
+                desktop_event = DesktopLockMenuEventSnake;
                 break;
             case DesktopLockMenuIndexBrightness:
                 desktop_event = DesktopLockMenuEventScreenSettings;
