@@ -16,9 +16,10 @@ static const NotificationSequence sequence_note_c = {
 
 typedef enum {
     DesktopLockMenuIndexDebug,
-    DesktopLockMenuIndexSettings,
-    DesktopLockMenuIndexDarkMode,
+    DesktopLockMenuIndex5VOnGPIO,
+
     DesktopLockMenuIndexLock,
+    DesktopLockMenuIndexSettings,
     DesktopLockMenuIndexBluetooth,
     DesktopLockMenuIndexSnake,
     DesktopLockMenuIndexBrightness,
@@ -96,12 +97,17 @@ void desktop_lock_menu_draw_callback(Canvas* canvas, void* model) {
             icon = &I_CC_DebugMode_16x16;
             enabled = furi_hal_rtc_is_flag_set(FuriHalRtcFlagDebug);
             break;
+        case DesktopLockMenuIndex5VOnGPIO:
+            icon = &I_CC_5VOnGPIO_16x16;
+            Power* power = furi_record_open(RECORD_POWER);
+            enabled = power_is_otg_enabled(power);
+            furi_record_close(RECORD_POWER);
+            break;
         case DesktopLockMenuIndexSettings:
             icon = &I_CC_Settings_16x16;
             break;
-        case DesktopLockMenuIndexDarkMode:
-            icon = &I_CC_DarkMode_16x16;
-            enabled = momentum_settings.dark_mode;
+        case DesktopLockMenuIndexSnake:
+            icon = &I_CC_Snake_16x16;
             break;
         case DesktopLockMenuIndexLock:
             icon = &I_CC_Lock_16x16;
@@ -109,9 +115,6 @@ void desktop_lock_menu_draw_callback(Canvas* canvas, void* model) {
         case DesktopLockMenuIndexBluetooth:
             icon = &I_CC_Bluetooth_16x16;
             enabled = m->lock_menu->bt->bt_settings.enabled;
-            break;
-        case DesktopLockMenuIndexSnake:
-            icon = &I_CC_Snake_16x16;
             break;
         case DesktopLockMenuIndexBrightness:
             icon = &I_Pin_star_7x7;
@@ -288,12 +291,17 @@ bool desktop_lock_menu_input_callback(InputEvent* event, void* context) {
                     furi_hal_rtc_set_flag(FuriHalRtcFlagDebug);
                 }
                 break;
+            case DesktopLockMenuIndex5VOnGPIO:
+                Power* power = furi_record_open(RECORD_POWER);
+                power_enable_otg(power, !power_is_otg_enabled(power));
+                furi_record_close(RECORD_POWER);
+                //desktop_event = DesktopLockMenuEvent5VOnGPIO;
+                break;
             case DesktopLockMenuIndexSettings:
                 desktop_event = DesktopLockMenuEventSettings;
                 break;
-            case DesktopLockMenuIndexDarkMode:
-                momentum_settings.dark_mode = !momentum_settings.dark_mode;
-                lock_menu->save_momentum = true;
+            case DesktopLockMenuIndexSnake:
+                desktop_event = DesktopLockMenuEventSnake;
                 break;
             case DesktopLockMenuIndexBluetooth:
                 lock_menu->bt->bt_settings.enabled = !lock_menu->bt->bt_settings.enabled;
@@ -303,9 +311,6 @@ bool desktop_lock_menu_input_callback(InputEvent* event, void* context) {
                     furi_hal_bt_stop_advertising();
                 }
                 lock_menu->save_bt = true;
-                break;
-            case DesktopLockMenuIndexSnake:
-                desktop_event = DesktopLockMenuEventSnake;
                 break;
             case DesktopLockMenuIndexBrightness:
                 desktop_event = DesktopLockMenuEventScreenSettings;
