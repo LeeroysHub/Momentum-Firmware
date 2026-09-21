@@ -361,7 +361,10 @@ static void archive_render_status_bar(Canvas* canvas, ArchiveBrowserViewModel* m
     }
     bool clip = model->clipboard != NULL;
 
-    canvas_draw_icon(canvas, 0, 0, &I_Background_128x11);
+    //Only draw the Bar Background if its on in CFW settings for the desktop.
+    if(momentum_settings.bar_background) {
+        canvas_draw_icon(canvas, 0, 0, &I_Background_128x11);
+    }
 
     canvas_set_color(canvas, ColorWhite);
     canvas_draw_box(canvas, 0, 0, 50, 13);
