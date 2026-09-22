@@ -31,6 +31,8 @@ const char* archive_get_flipper_app_name(ArchiveFileTypeEnum file_type) {
         return EXT_PATH("apps/Sub-Ghz/subghz_remote.fap");
     case ArchiveFileTypeProtoPirate:
         return EXT_PATH("apps/Sub-Ghz/proto_pirate.fap");
+    case ArchiveFileTypeCarzzz:
+        return EXT_PATH("apps/Sub-Ghz/carzzz.fap");
     case ArchiveFileTypeInfraredRemote:
         return EXT_PATH("apps/Infrared/ir_remote.fap");
     case ArchiveFileTypeBadUsb:
@@ -175,14 +177,21 @@ static void
             loader_start_with_gui_error(loader, app_name, param);
         } else {
             const char* str = furi_string_get_cstr(selected->path);
-            if(favorites &&
-               (selected->type == ArchiveFileTypeIButton ||
-                selected->type == ArchiveFileTypeLFRFID || selected->type == ArchiveFileTypeNFC ||
-                selected->type == ArchiveFileTypeSubGhz)) {
-                char arg[strlen(str) + 4];
-                snprintf(arg, sizeof(arg), "fav%s", str);
-                loader_start_with_gui_error(loader, app_name, arg);
-            } else {
+            switch(selected->type) {
+            case ArchiveFileTypeIButton:
+            case ArchiveFileTypeLFRFID:
+            case ArchiveFileTypeNFC:
+            case ArchiveFileTypeSubGhz:
+            case ArchiveFileTypeCarzzz:
+                if(favorites) {
+                    char arg[strlen(str) + 4];
+                    snprintf(arg, sizeof(arg), "fav%s", str);
+                    loader_start_with_gui_error(loader, app_name, arg);
+
+                    break;
+                }
+                __attribute__((fallthrough));
+            default:
                 loader_start_detached_with_gui_error(loader, app_name, str);
             }
         }

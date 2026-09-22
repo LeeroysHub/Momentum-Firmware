@@ -636,6 +636,9 @@ void archive_enter_dir(ArchiveBrowserView* browser, FuriString* path) {
             switch_ext = known_ext[ArchiveFileTypeSubghzRemote];
         }
         break;
+    case ArchiveTabCarzzz:
+        switch_ext = known_ext[ArchiveFileTypeCarzzz];
+        break;
     case ArchiveTabInfrared:
         if(furi_string_cmp_str(browser->path, EXT_PATH("infrared/remote")) == 0) {
             switch_ext = known_ext[ArchiveFileTypeInfraredRemote];
@@ -671,6 +674,9 @@ void archive_leave_dir(ArchiveBrowserView* browser) {
         if(furi_string_cmp_str(browser->path, EXT_PATH("infrared")) == 0) {
             switch_ext = known_ext[ArchiveFileTypeInfrared];
         }
+        break;
+    case ArchiveTabCarzzz:
+        switch_ext = known_ext[ArchiveFileTypeCarzzz];
         break;
     default:
         break;
