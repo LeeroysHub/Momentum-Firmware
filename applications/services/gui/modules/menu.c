@@ -82,7 +82,7 @@ static void menu_centered_icon(
         item->icon);
 }
 
-static void menu_centered_icon_scaled(
+/*static void menu_centered_icon_scaled(
     Canvas* canvas,
     MenuItem* item,
     size_t x,
@@ -98,7 +98,7 @@ static void menu_centered_icon_scaled(
         width_scale,
         height_scale,
         item->icon);
-}
+}*/
 
 static size_t menu_scroll_counter(MenuModel* model, bool selected) {
     if(!selected) return 0;
@@ -174,7 +174,7 @@ static void menu_draw_callback(Canvas* canvas, void* _model) {
             }
             break;
         }
-        case MenuStyleDsi: {
+        /*case MenuStyleDsi: {
             for(int8_t i = -2; i <= 2; i++) {
                 shift_position = (position + items_count + i) % items_count;
                 item = MenuItemArray_get(model->items, shift_position);
@@ -310,6 +310,7 @@ static void menu_draw_callback(Canvas* canvas, void* _model) {
             canvas_set_orientation(canvas, CanvasOrientationHorizontal);
             break;
         }
+        */
         case MenuStyleC64: {
             size_t index;
             size_t y_off, x_off;
@@ -354,7 +355,7 @@ static void menu_draw_callback(Canvas* canvas, void* _model) {
 
             break;
         }
-        case MenuStyleCompact: {
+        /*case MenuStyleCompact: {
             size_t index;
             size_t y_off, x_off;
 
@@ -568,7 +569,7 @@ static void menu_draw_callback(Canvas* canvas, void* _model) {
             elements_scrollbar_horizontal(canvas, 0, 60, 128, position, items_count);
 
             break;
-        }
+        }*/
         default:
             break;
         }
@@ -583,14 +584,15 @@ static void menu_draw_callback(Canvas* canvas, void* _model) {
 static bool menu_input_callback(InputEvent* event, void* context) {
     Menu* menu = context;
     bool consumed = true;
-    if(momentum_settings.menu_style == MenuStyleVertical &&
+
+    /*if(momentum_settings.menu_style == MenuStyleVertical &&
        furi_hal_rtc_is_flag_set(FuriHalRtcFlagHandOrient)) {
         if(event->key == InputKeyLeft) {
             event->key = InputKeyRight;
         } else if(event->key == InputKeyRight) {
             event->key = InputKeyLeft;
         }
-    }
+    }*/
 
     if(event->type == InputTypeShort || event->type == InputTypeRepeat) {
         switch(event->key) {
@@ -822,7 +824,7 @@ static void menu_process_up(Menu* menu) {
 
             switch(momentum_settings.menu_style) {
             case MenuStyleList:
-            case MenuStyleMNTM:
+                //case MenuStyleMNTM:
                 if(position > 0) {
                     position--;
                 } else {
@@ -837,7 +839,7 @@ static void menu_process_up(Menu* menu) {
                 }
                 break;
             case MenuStyleC64:
-            case MenuStyleCompact:
+                //case MenuStyleCompact:
                 if(position > 0) {
                     position--;
                 } else {
@@ -864,7 +866,7 @@ static void menu_process_down(Menu* menu) {
 
             switch(momentum_settings.menu_style) {
             case MenuStyleList:
-            case MenuStyleMNTM:
+                //case MenuStyleMNTM:
                 if(position < count - 1) {
                     position++;
                 } else {
@@ -879,7 +881,7 @@ static void menu_process_down(Menu* menu) {
                 }
                 break;
             case MenuStyleC64:
-            case MenuStyleCompact:
+                //case MenuStyleCompact:
                 if(position < count - 1) {
                     position++;
                 } else {
@@ -916,10 +918,10 @@ static void menu_process_left(Menu* menu) {
                     position -= 2;
                 }
                 break;
-            case MenuStyleDsi:
-            case MenuStylePs4:
-            case MenuStyleVertical:
-            case MenuStyleCoverFlow:
+            //case MenuStyleDsi:
+            //case MenuStylePs4:
+            //case MenuStyleVertical:
+            /*case MenuStyleCoverFlow:
                 size_t vertical_offset = model->vertical_offset;
                 if(position > 0) {
                     position--;
@@ -932,6 +934,7 @@ static void menu_process_left(Menu* menu) {
                 }
                 model->vertical_offset = vertical_offset;
                 break;
+            */
             case MenuStyleC64:
                 if((position % 10) < 5) {
                     position = position + 5;
@@ -939,14 +942,14 @@ static void menu_process_left(Menu* menu) {
                     position = position - 5;
                 }
                 break;
-            case MenuStyleCompact:
+            /*case MenuStyleCompact:
                 if((position % 16) < 8) {
                     position = position + 8;
                 } else {
                     position = position - 8;
                 }
                 break;
-
+            */
             default:
                 break;
             }
@@ -981,10 +984,10 @@ static void menu_process_right(Menu* menu) {
                     }
                 }
                 break;
-            case MenuStyleDsi:
-            case MenuStylePs4:
-            case MenuStyleVertical:
-            case MenuStyleCoverFlow:
+            //case MenuStyleDsi:
+            //case MenuStylePs4:
+            //case MenuStyleVertical:
+            /*case MenuStyleCoverFlow:
                 size_t vertical_offset = model->vertical_offset;
                 if(position < count - 1) {
                     position++;
@@ -997,6 +1000,7 @@ static void menu_process_right(Menu* menu) {
                 }
                 model->vertical_offset = vertical_offset;
                 break;
+            */
             case MenuStyleC64:
                 if((position % 10) < 5) {
                     position = position + 5;
@@ -1004,7 +1008,7 @@ static void menu_process_right(Menu* menu) {
                     position = position - 5;
                 }
                 break;
-            case MenuStyleCompact:
+                /*case MenuStyleCompact:
                 if((position % 16) < 8) {
                     position = position + 8;
                 } else {
@@ -1012,6 +1016,7 @@ static void menu_process_right(Menu* menu) {
                 }
                 break;
 
+            */
             default:
                 break;
             }

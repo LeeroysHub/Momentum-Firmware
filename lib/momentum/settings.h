@@ -23,13 +23,13 @@ typedef enum {
 typedef enum {
     MenuStyleList,
     MenuStyleWii,
-    MenuStyleDsi,
-    MenuStylePs4,
-    MenuStyleVertical,
+    //MenuStyleDsi,
+    //MenuStylePs4,
+    //MenuStyleVertical,
     MenuStyleC64,
-    MenuStyleCompact,
-    MenuStyleMNTM,
-    MenuStyleCoverFlow,
+    //MenuStyleCompact,
+    //M//enuStyleMNTM,
+    //MenuStyleCoverFlow,
     MenuStyleCount,
 } MenuStyle;
 

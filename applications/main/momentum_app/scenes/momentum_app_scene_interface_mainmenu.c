@@ -17,13 +17,13 @@ void momentum_app_scene_interface_mainmenu_var_item_list_callback(void* context,
 const char* const menu_style_names[MenuStyleCount] = {
     "List",
     "Wii",
-    "DSi",
-    "PS4",
-    "Vertical",
+    //"DSi",
+    // "PS4",
+    // "Vertical",
     "C64",
-    "Compact",
-    "MNTM",
-    "CoverFlow",
+    //  "Compact",
+    // "MNTM",
+    //"CoverFlow",
 };
 static void momentum_app_scene_interface_mainmenu_menu_style_changed(VariableItem* item) {
     MomentumApp* app = variable_item_get_context(item);
